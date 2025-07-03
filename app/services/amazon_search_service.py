@@ -71,10 +71,61 @@ class AmazonService:
             print(f"Review fetch error for ASIN {asin}: {e}")
             return []
 
+    # NEW: Keyword-based reviews function
+    @classmethod
+    def get_product_reviews_by_keyword(cls, keyword: str, product_limit: int = 2) -> list:
+        """
+        Get reviews for products based on keyword search.
+        Returns reviews for top products matching the keyword.
+        """
+        results = []
+        products = cls._search_products(keyword, count=product_limit)
+        
+        for product in products:
+            asin = product.get("asin")
+            if not asin:
+                continue
+                
+            reviews = cls._get_product_reviews(asin)
+            if reviews:
+                results.append({
+                    "product_title": product.get("title", "Unknown Product"),
+                    "asin": asin,
+                    "reviews": reviews
+                })
+        
+        return results
 
+    # NEW: Keyword-based product descriptions function
+    @classmethod
+    def get_product_descriptions_by_keyword(cls, keyword: str, product_limit: int = 2) -> list:
+        """
+        Get detailed descriptions for products based on keyword search.
+        """
+        results = []
+        products = cls._search_products(keyword, count=product_limit)
+        
+        for product in products:
+            asin = product.get("asin")
+            if not asin:
+                continue
+                
+            details = cls._get_product_details(asin)
+            if details.get("status") == "success":
+                results.append({
+                    "product_title": details.get("title"),
+                    "asin": asin,
+                    "description": " ".join(details.get("aboutThisItem", [])),
+                    "price": details.get("price"),
+                    "rating": details.get("rating"),
+                    "total_reviews": details.get("ratingNumber"),
+                    "product_url": f"https://www.amazon.com/dp/{asin}",
+                    "image": details.get("images", [None])[0]
+                })
+        
+        return results
 
     @classmethod
-    
     def get_top_products(cls, keyword: str, limit: int = 2) -> list:
         results = []
         top_items = cls._search_products(keyword, count=limit)
@@ -105,7 +156,6 @@ class AmazonService:
 
         return results
             
-    
     @classmethod
     def get_filtered_products(cls, keyword: str, filters: dict, limit: int = 5) -> list:
         results = []

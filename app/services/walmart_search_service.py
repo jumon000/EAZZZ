@@ -69,7 +69,57 @@ class WalmartService:
             print(f"[Reviews Error] Walmart ID {us_item_id}: {e}")
             return []
 
+    # NEW: Keyword-based reviews function
+    @classmethod
+    def get_product_reviews_by_keyword(cls, keyword: str, product_limit: int = 2) -> list:
+        """
+        Get reviews for products based on keyword search.
+        Returns reviews for top products matching the keyword.
+        """
+        results = []
+        products = cls._search_products(keyword, count=product_limit)
+        
+        for product in products:
+            us_item_id = product.get("usItemId")
+            if not us_item_id:
+                continue
+                
+            reviews = cls._get_product_reviews(us_item_id)
+            if reviews:
+                results.append({
+                    "product_name": product.get("name", "Unknown Product"),
+                    "usItemId": us_item_id,
+                    "reviews": reviews
+                })
+        
+        return results
 
+    # NEW: Keyword-based product descriptions function
+    @classmethod
+    def get_product_descriptions_by_keyword(cls, keyword: str, product_limit: int = 2) -> list:
+        """
+        Get detailed descriptions for products based on keyword search.
+        """
+        results = []
+        products = cls._search_products(keyword, count=product_limit)
+        
+        for product in products:
+            us_item_id = product.get("usItemId")
+            if not us_item_id:
+                continue
+                
+            description = cls._get_product_description(us_item_id)
+            results.append({
+                "product_name": product.get("name"),
+                "usItemId": us_item_id,
+                "description": description,
+                "price": product.get("priceInfo", {}).get("currentPrice", {}).get("priceDisplay"),
+                "rating": product.get("averageRating"),
+                "image": product.get("imageInfo", {}).get("thumbnailUrl"),
+                "product_url": f"https://www.walmart.com/ip/{us_item_id}"
+            })
+        
+        return results
 
     @classmethod
     def get_top_products(cls, keyword: str, count: int = 2) -> list:
