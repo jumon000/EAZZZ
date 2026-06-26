@@ -1,30 +1,30 @@
-# 🧠 EAZZZ — Multi-Agent Conversational Product Finder
+#  EAZZZ — Multi-Agent Conversational Product Finder
 
 **EAZZZ** is an intelligent, agent-based conversational system designed to help users search, compare, and choose products using natural language queries. It leverages **LLMs**, **RAG**, **FastAPI**, and custom agents to create a seamless, chat-driven shopping experience that's fast, extendable, and built to scale.
 
 ---
 
-## 🚀 Features
+##  Features
 
-- 🚩 Natural Language Product Search
-- 🤖 Multi-Agent Architecture with Role Separation
-- 📚 RAG (Retrieval-Augmented Generation) Agent for Context-Aware Responses
-- 🧠 Query Analysis & Response Formatting
-- 📝 Conversation Logging via LogConvo Agent
-- 👥 GroupChat Orchestration for Collaborative Responses
-- 🧑‍💼 Custom Speaker Selector for Agent Specialization
-- 🏃 FastAPI Backend
-- 📂 Easily Extendable Agent System
+-  Natural Language Product Search
+-  Multi-Agent Architecture with Role Separation
+-  RAG (Retrieval-Augmented Generation) Agent for Context-Aware Responses
+-  Query Analysis & Response Formatting
+-  Conversation Logging via LogConvo Agent
+-  GroupChat Orchestration for Collaborative Responses
+-  Custom Speaker Selector for Agent Specialization
+-  FastAPI Backend
+-  Easily Extendable Agent System
 
 ---
 
-## 🧭 System Workflow
+##  System Workflow
 
 ![Workflow Diagram](assets/workflow.png)
 
 ---
 
-## 🧠 Agent Descriptions
+## Agent Descriptions
 
 | Agent                    | Description |
 |--------------------------|-------------|
@@ -63,7 +63,7 @@ OPENAI_API_KEY=your_openai_key
 CHROMADB_PATH=./memory/chromadb
 ```
 
-> 🔑 Replace `your_openai_key` with your actual OpenAI API key from [platform.openai.com](https://platform.openai.com)
+>  Replace `your_openai_key` with your actual OpenAI API key from [platform.openai.com](https://platform.openai.com)
 
 ### 4. Run the Server
 
@@ -74,12 +74,12 @@ uvicorn api.main:app --reload
 ```
 
 **Access Points:**
-- 🌐 **API Root**: http://localhost:8000
-- 📘 **Swagger UI**: http://localhost:8000/docs
+-  **API Root**: http://localhost:8000
+-  **Swagger UI**: http://localhost:8000/docs
 
 ---
 
-## 🧪 Example Usage
+##  Example Usage
 
 ### Sample Request
 
@@ -112,15 +112,14 @@ curl -X POST http://localhost:8000/query \
 
 ---
 
-## 🚀 Roadmap
+##  Roadmap
 
-- 🔌 Integrate Additional APIs (Flipkart, eBay, etc.)
-- 📈 Build Streamlit or React Frontend
-- 🧠 Improve Memory with LlamaIndex or LangGraph
-- 🔍 Add Richer Comparison and Filtering Logic
-- 📊 Advanced Analytics and User Preferences
+-  Integrate Additional APIs (Flipkart, eBay, etc.)
+-  Build Streamlit or React Frontend
+-  Improve Memory with LlamaIndex or LangGraph
+-  Add Richer Comparison and Filtering Logic
+-  Advanced Analytics and User Preferences
 
 ---
 
-**Made with 💙, ☕ and 🧠 by [@jumon000](https://github.com/jumon000)**
 
